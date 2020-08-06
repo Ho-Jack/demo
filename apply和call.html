@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function add(j, k) {
+        console.log(this);     
+        return j + k;
+    }
+    function sub(j, k) {
+        console.log(this);
+          this.add(1,1)   //2  这里没啥用。！！sub和add的this都是同样的window对象
+       
+        return j - k;
+    }
+
+    let that={
+        A:1,
+        B:2
+
+    }
+  
+    add(5, 3); //8 this为window对象  有个add的属性(废话，函数add定义在全局变量 肯定有add这个函数)   
+    sub(2,1)
+
+    add.call(sub, 5, 3); //8 this为sub这个函数      
+    
+    sub.add(1,1)   //报错！！sub内并没有add这个属性 继承只能基于原型继承
+
+    sub(2,1)  //1 进入函数内部 this为window对象 有个add的属性(废话，函数add定义在全局变量 肯定有add这个函数) 
+  
+    add.call(that, 5, 3); //8 this为that这个对象     
+    add.apply(sub, [5, 3]); //8 this为sub这个函数        
+     
+   
+</script>

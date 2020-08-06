@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>11111</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+    }
+</style>
+
+<body>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div>11</div>
+    <div id="myVideo" style="margin-left:20%;width: 80%;height: 60%; ">
+        <!-- <iframe src="./客户视频无弹框/basic.html" width="100%" height="100%" id="iframe"></iframe> -->
+        <iframe src="http://106.15.204.145:8081" width="100%" height="100%" id="iframe"></iframe>
+    </div>
+</body>
+
+</html>
+<script src="./客户视频无弹框/source/jquery.js"></script>
+<script>
+    window.onload = function () {
+       
+        postIframe()
+    }
+    window.onresize = function () {
+     //  clearInterval(timer)
+         
+     postIframe()
+    //   timer= setTimeout(()=>{
+    //     postIframe()
+    //    },500)
+    }
+    function postIframe() {
+        let myMessage = $('#myVideo').offset()
+        let parentHeight = $('#myVideo').height()
+        let parentWidth = $('#myVideo').width()
+        console.log(parentHeight);
+        console.log(parentWidth);
+      
+        var receiver = document.getElementById('iframe').contentWindow;
+        receiver.postMessage({ parentHeight, parentWidth, myMessage }, '*');
+    }
+</script>

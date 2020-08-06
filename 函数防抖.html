@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="height:5000px;">
+    <input type="button" onclick="myfd()" />
+</body>
+
+</html>
+<script>
+    // function fd(handler,wait){
+    //    let timer=null
+    //    return  function () { 
+    //        if(timer!=null)  clearTimeout(timer)
+    //        timer=setTimeout( handler,wait)
+    //     }
+    // }
+    // function handler(){
+    //     console.log('函数防抖触发');
+    // }
+    // window.addEventListener('scroll',fd(handler,500))
+
+    function fd(wait) {
+        console.log('进去函数');
+        let timer = null
+        return function () {
+            if (timer != null) clearTimeout(timer)
+            timer = setTimeout(() => {
+                console.log('函数防抖触发');
+            }, wait)
+        }
+    }
+    let myfd = fd(1000)
+    // window.onscroll = function () {
+    //     myfd()
+    // }
+    window.addEventListener('scroll', () => {
+        myfd()
+    })
+  
+</script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+        <h1 class="ht">我是头</h1>
+        <p class="para">我是段落</p>
+    <div>
+        <p >1</p>
+
+        <div id="A">
+            <p>2</p>
+            <div>aaaa</div>
+            <p>3
+                <p>3-1</p>
+                <p>3-2</p>
+            </p>
+        </div>
+        <p>4</p>
+        <p>5</p>
+        <div>aa</div>
+
+        <p>6</p>
+    </div>
+
+    <input/>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+    //     let p = document.getElementsByTagName('p')
+    //    let bb= p[0].childNodes 
+    //     let A =document.getElementById('A')
+    //     let aa =A.childNodes
+    let z=document.querySelectorAll('#A >p');
+        debugger
+    }
+</script>
+<style>
+     .ht,.para{
+            color: red;
+        }
+#A {
+    background-color: blue;
+}
+input:checked{
+    background-color: yellow;
+}
+</style>

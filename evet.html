@@ -1,0 +1,43 @@
+<!-- 事件委托 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list" >
+        <li>item 1
+            <div id="A">111</div>
+            <div id="B">222</div>
+            <div id="C">333</div>
+            <div id="D">444</div>
+        </li>
+        <li>item 2</li>
+        <li>item 3</li>
+       
+        <li>item n</li>
+      </ul>
+</body>
+</html>
+<script>
+ 
+  document.getElementById('list').onclick=function(e){
+    console.log(e.target.innerText);
+    var target = event.target;
+      switch (target.id) {
+        case "A":
+               alert("A");
+          break;
+        case "B":
+               alert("B");
+          break;
+        case "C":
+              alert("C");
+          break;
+      }
+   
+  }
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="div1">
+        <div class="div1-1"></div>
+    </div>
+   
+    <div class="div2"></div>
+</body>
+
+</html>
+<script>
+function getStyle(obj , name){
+			if(window.getComputedStyle){
+		//正常浏览器的方式，具有getComputedStyle()方法
+					return getComputedStyle(obj , null)[name];
+				}else{
+		//IE8的方式，没有getComputedStyle()方法
+					return obj.currentStyle[name];
+				}
+
+//return window.getComputedStyle?getComputedStyle(obj , null)[name]:obj.currentStyle[name];	
+}	
+window.onload=function(){
+    let div1=document.getElementsByClassName('div1')
+  console.log(getStyle(div1[0] , 'width'));
+  
+ 
+    
+}
+
+</script>
+
+<style>
+    .div1 {
+        background-color: cornflowerblue;
+    }
+
+
+  
+      .div1:after {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+        overflow: hidden;
+    }
+
+    .div1-1 {
+        background-color: aquamarine;
+        /* float: left; */
+        position: absolute;
+        width: 100px;
+        height: 100px;
+    }
+
+    .div2 {
+        background-color: bisque;
+        width: 500px;
+        height: 100px;
+    }
+</style>

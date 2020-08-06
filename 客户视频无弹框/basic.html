@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本设置</title>
+
+
+    <!--和插件无关的样式-->
+    <style type="text/css">
+        body {
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .introduce_msg {
+            padding: 0 8px;
+            letter-spacing: 1px;
+            text-indent: 2em;
+            line-height: 25px;
+        }
+
+        .hikRight {
+            float: left;
+            width: 200px;
+            margin-left: 10px;
+            height: 590px;
+            padding-left: 10px;
+            padding-top: 10px;
+
+            background-color: #132C55;
+            position: absolute;
+        }
+
+        .hikRight-title {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .hikRight-select {
+            list-style: none;
+            margin-block-start: 0.5em;
+            color: #fff;
+            cursor: pointer;
+            padding-inline-start: 15px;
+        }
+
+        .hikRight-select>li {
+            margin-bottom: 5px;
+        }
+
+        .hikRight-select>li:hover {
+            color: #0081ff;
+        }
+
+        .svg1 {
+            height: 20px;
+            position: relative;
+            top: 4px;
+            margin-right: 8px;
+
+        }
+
+        .svg2 {
+            height: 20px;
+            position: relative;
+            top: 4px;
+            margin-right: 8px;
+
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+
+    <!-- 视频窗 -->
+    <div id="playWnd" class="playWnd" style="float:left;">
+    </div>
+    <!-- 列表 -->
+    <div class="hikRight">
+        <div class="hikRight-title"><embed src="./source/image/video1.svg" type="image/svg+xml" class="svg1" />监控设备列表
+        </div>
+        <ul class="hikRight-select">
+            <li onclick="PalyVideo('aef6336425954dd190b44569d1438cde');"><embed src="./source/image/video2.svg"
+                    class="svg2" type="image/svg+xml" />监控AAAAAA</li>
+            <li onclick="PalyVideo('aef6336425954dd190b44569d1438cde');"><embed src="./source/image/video2.svg"
+                    class="svg2" type="image/svg+xml" />监控BBBB</li>
+            <li onclick="PalyVideo('aef6336425954dd190b44569d1438cde');"><embed src="./source/image/video2.svg"
+                    class="svg2" type="image/svg+xml" />监控CCCCC</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
+<!--三个必要的js文件引入-->
+<script type="text/javascript" src="./source/jquery.js"></script>
+
+<script src="jsencrypt.min.js"></script>
+<!-- 用于RSA加密 -->
+<script src="jsWebControl-1.0.0.min.js"></script>
+<!-- 用于前端与插件交互 -->
+<script type="text/javascript">
+
+    function changeVideo() {
+
+        $("#playWnd").css("width", newWidth + "px");
+        $("#playWnd").css("height", newheight + "px");
+
+        $("#playWnd").css("margin-top", Number(inittop) + 1 + "px");
+        $("#playWnd").css("margin-left", Number(initLeft) + 1 + "px");
+
+        if (oWebControl != null) {
+
+            oWebControl.JS_Resize(newWidth, newheight);
+            //  $("#playWnd").css("width", newWidth + "px");
+            //  $("#playWnd").css("height", newheight + "px");
+            // $("#playWnd").css("margin-top", Number(inittop) + 1 + "px");
+            // $("#playWnd").css("margin-left", Number(initLeft) + 1 + "px");
+
+            $(".hikRight").css("left", newWidth - 11 + "px");
+            // window.videoTimer = setTimeout(() => {
+            //     // $("#playWnd").css("margin-top", 0 + "px");
+            //     // $("#playWnd").css("margin-left", 0 + "px");
+            //     $("#playWnd").css("margin-top", Number(inittop) + 1 + "px");
+            // $("#playWnd").css("margin-left", Number(initLeft) + 1 + "px");
+            // }, 5000)
+        }
+
+
+    }
+
+
+
+    $(function () {
+        window.addEventListener('message', function (e) {
+       
+        //    console.log(e.data)  //e.data为传递过来的数据
+            inittop = e.data.myMessage.top
+            initLeft = e.data.myMessage.left
+            newheight = e.data.parentHeight
+            newWidth = e.data.parentWidth - 200
+            changeVideo()
+           videoTimer = setTimeout(() => {
+                $("#playWnd").css("margin-top", 0 + "px");
+                $("#playWnd").css("margin-left", 0 + "px");
+            
+            }, 1000)
+        })
+    
+        // $("#playWnd").css("margin-top", Number(0) + "px");
+        // $("#playWnd").css("margin-left", Number(0) + "px");
+        //初始化
+        initPlugin()
+
+    })
+    //声明公用变量
+    var initCount = 0
+    var pubKey = ''
+
+    // 创建播放实例
+    function initPlugin() {
+        oWebControl = new WebControl({
+            szPluginContainer: 'playWnd', // 指定容器id
+            iServicePortStart: 15900, // 指定起止端口号，建议使用该值
+            iServicePortEnd: 15909,
+            szClassId: '23BF3B0A-2C56-4D97-9C03-0CB103AA8F11', // 用于IE10使用ActiveX的clsid
+            cbConnectSuccess: function () {
+                // 创建WebControl实例成功
+                oWebControl
+                    .JS_StartService('window', {
+                        // WebControl实例创建成功后需要启动服务
+                        dllPath: './VideoPluginConnect.dll' // 值"./VideoPluginConnect.dll"写死
+                    })
+                    .then(
+                        function () {
+                            // 启动插件服务成功
+                            oWebControl.JS_SetWindowControlCallback({
+                                // 设置消息回调
+                                cbIntegrationCallBack: cbIntegrationCallBack
+                            })
+                          
+                            oWebControl.JS_CreateWnd('playWnd', 500, 400).then(function () {
+
+                                //JS_CreateWnd创建视频播放窗口，宽高可设定
+                                init() // 创建播放实例成功后初始化
+                              
+
+                            })
+
+                            //   changeVideo()
+
+                        },
+                        function () {
+                            // 启动插件服务失败
+                        }
+                    )
+            },
+            cbConnectError: function () {
+                // 创建WebControl实例失败
+                oWebControl = null
+                $('#playWnd').html('插件未启动，正在尝试启动，请稍候...')
+                WebControl.JS_WakeUp('VideoWebPlugin://') // 程序未启动时执行error函数，采用wakeup来启动程序
+                initCount++
+                if (initCount < 3) {
+                    setTimeout(function () {
+                        initPlugin()
+                    }, 3000)
+                } else {
+                    $('#playWnd').html('插件启动失败，请检查插件是否安装！')
+                }
+            },
+            cbConnectClose: function (bNormalClose) {
+                // 异常断开：bNormalClose = false
+                // JS_Disconnect正常断开：bNormalClose = true
+                console.log('cbConnectClose')
+                oWebControl = null
+            }
+        })
+    }
+
+    // 设置窗口控制回调
+    function setCallbacks() {
+        oWebControl.JS_SetWindowControlCallback({
+            cbIntegrationCallBack: cbIntegrationCallBack
+        })
+    }
+
+    // 推送消息
+    function cbIntegrationCallBack(oData) {
+        console.log(JSON.stringify(oData.responseMsg))
+        //    showCBInfo(JSON.stringify(oData.responseMsg))
+    }
+
+    //初始化
+    function init() {
+        getPubKey(function () {
+            ////////////////////////////////// 请自行修改以下变量值	////////////////////////////////////
+            var appkey = '28407291' //综合安防管理平台提供的appkey，必填
+            var secret = setEncrypt('DcUo0aNxVQRo9NjBGdia') //综合安防管理平台提供的secret，必填
+            var ip = '121.9.236.11' //综合安防管理平台IP地址，必填
+            var playMode = 0 //初始播放模式：0-预览，1-回放
+            var port = 8358 //综合安防管理平台端口，若启用HTTPS协议，默认443
+            var snapDir = 'D:\\SnapDir' //抓图存储路径
+            var videoDir = 'D:\\VideoDir' //紧急录像或录像剪辑存储路径
+            var layout = '2x2' //playMode指定模式的布局
+            var enableHTTPS = 1 //是否启用HTTPS协议与综合安防管理平台交互，是为1，否为0
+            var encryptedFields = 'secret' //加密字段，默认加密领域为secret
+            var showToolbar = 1 //是否显示工具栏，0-不显示，非0-显示
+            var showSmart = 1 //是否显示智能信息（如配置移动侦测后画面上的线框），0-不显示，非0-显示
+            var buttonIDs =
+                '0,16,256,257,258,259,260,512,513,514,515,516,517,768,769' //自定义工具条按钮
+            ////////////////////////////////// 请自行修改以上变量值	////////////////////////////////////
+
+            oWebControl
+                .JS_RequestInterface({
+                    funcName: 'init',
+                    argument: JSON.stringify({
+                        appkey: appkey, //API网关提供的appkey
+                        secret: secret, //API网关提供的secret
+                        ip: ip, //API网关IP地址
+                        playMode: playMode, //播放模式（决定显示预览还是回放界面）
+                        port: port, //端口
+                        snapDir: snapDir, //抓图存储路径
+                        videoDir: videoDir, //紧急录像或录像剪辑存储路径
+                        layout: layout, //布局
+                        enableHTTPS: enableHTTPS, //是否启用HTTPS协议
+                        encryptedFields: encryptedFields, //加密字段
+                        showToolbar: showToolbar, //是否显示工具栏
+                        showSmart: showSmart, //是否显示智能信息
+                        buttonIDs: buttonIDs //自定义工具条按钮
+                    })
+                })
+                .then(function (oData) {
+                    oWebControl.JS_Resize(newWidth, newheight) // 初始化后resize一次，规避firefox下首次显示窗口后插件窗口未与DIV窗口重合问题
+                    $("#playWnd").css("margin-top", -1 + "px");
+                    $("#playWnd").css("margin-left",0+ "px");
+                })
+        })
+    }
+
+    //获取公钥
+    function getPubKey(callback) {
+        oWebControl
+            .JS_RequestInterface({
+                funcName: 'getRSAPubKey',
+                argument: JSON.stringify({
+                    keyLength: 1024
+                })
+            })
+            .then(function (oData) {
+                console.log(oData)
+                if (oData.responseMsg.data) {
+                    pubKey = oData.responseMsg.data
+                    callback()
+                }
+            })
+    }
+
+    //RSA加密
+    function setEncrypt(value) {
+        var encrypt = new JSEncrypt()
+        encrypt.setPublicKey(pubKey)
+        return encrypt.encrypt(value)
+    }
+
+    // 监听resize事件，使插件窗口尺寸跟随DIV窗口变化
+    // $(window).resize(function () {
+    //     if (oWebControl != null) {
+    //         oWebControl.JS_Resize(1260, 660)
+    //         setWndCover()
+    //     }
+    // })
+    // $(window).resize(function () {
+
+    //     checkRise();
+    //     var newheight = clientHeight - topHeight - inittop - 5;
+    //     var newWidth = clientWidth - menuwidth - 200;
+
+    //     $("#playWnd").css("margin-top", Number(topHeight) + Number(inittop) + "px");
+    //     $("#playWnd").css("margin-left", Number(menuwidth) + Number(initLeft) + 1 + "px");
+    //     $("#playWnd").css("width", newWidth + "px");
+    //     $("#playWnd").css("height", newheight + "px");
+    //     if (oWebControl != null) {
+    //         oWebControl.JS_Resize(newWidth, newheight);
+    //         //setWndCover();
+    //         $("#playWnd").css("margin-top", Number(inittop) + 15 + "px");
+    //         $("#playWnd").css("margin-left", Number(initLeft) + 1 + "px");
+    //         // $("#playWnd").css("width", newWidth + "px");
+    //         $("#playWnd").css("height", newheight + "px");
+    //     }
+    // }, false);
+    //监听滚动条scroll事件，使插件窗口跟随浏览器滚动而移动
+    $(window).scroll(function () {
+        console.log('滚动');
+        
+        if (oWebControl != null) {
+            oWebControl.JS_Resize(newWidth, newheight)
+            setWndCover()
+        }
+    })
+    window.onscroll=function(){
+        if (oWebControl != null) {
+            oWebControl.JS_Resize(newWidth, newheight)
+            setWndCover()
+        }
+    }
+    // 设置窗口裁剪，当因滚动条滚动导致窗口需要被遮住的情况下需要JS_CuttingPartWindow部分窗口
+    function setWndCover() {
+
+        var iWidth = $(window).width()
+        var iHeight = $(window).height()
+        var oDivRect = $('#playWnd')
+            .get(0)
+            .getBoundingClientRect()
+
+        var iCoverLeft = oDivRect.left < 0 ? Math.abs(oDivRect.left) : 0
+        var iCoverTop = oDivRect.top < 0 ? Math.abs(oDivRect.top) : 0
+        var iCoverRight =
+            oDivRect.right - iWidth > 0 ? Math.round(oDivRect.right - iWidth) : 0
+        var iCoverBottom =
+            oDivRect.bottom - iHeight > 0
+                ? Math.round(oDivRect.bottom - iHeight)
+                : 0
+
+        iCoverLeft = iCoverLeft > newWidth ? newWidth : iCoverLeft
+        iCoverTop = iCoverTop > newheight ? newheight : iCoverTop
+        iCoverRight = iCoverRight > newWidth ? newWidth : iCoverRight
+        iCoverBottom = iCoverBottom > newheight ? newheight : iCoverBottom
+
+        oWebControl.JS_RepairPartWindow(0, 0, newWidth + 1, newheight) // 多1个像素点防止还原后边界缺失一个像素条
+        if (iCoverLeft != 0) {
+            oWebControl.JS_CuttingPartWindow(0, 0, iCoverLeft, newheight)
+        }
+        if (iCoverTop != 0) {
+            oWebControl.JS_CuttingPartWindow(0, 0, newWidth + 1, iCoverTop) // 多剪掉一个像素条，防止出现剪掉一部分窗口后出现一个像素条
+        }
+        if (iCoverRight != 0) {
+            oWebControl.JS_CuttingPartWindow(
+                newWidth - iCoverRight,
+                0,
+                iCoverRight,
+                newheight
+            )
+        }
+        if (iCoverBottom != 0) {
+            oWebControl.JS_CuttingPartWindow(
+                0,
+                newheight - iCoverBottom,
+                newWidth,
+                iCoverBottom
+            )
+        }
+
+    }
+
+    //视频预览功能 按钮
+    $('#startPreview').click(function () {
+        var cameraIndexCode = $('#cameraIndexCode').val() //获取输入的监控点编号值，必填
+        var streamMode = 0 //主子码流标识：0-主码流，1-子码流
+        var transMode = 1 //传输协议：0-UDP，1-TCP
+        var gpuMode = 0 //是否启用GPU硬解，0-不启用，1-启用
+        var wndId = -1 //播放窗口序号（在2x2以上布局下可指定播放窗口）
+
+        cameraIndexCode = cameraIndexCode.replace(/(^\s*)/g, '')
+        cameraIndexCode = cameraIndexCode.replace(/(\s*$)/g, '')
+
+        oWebControl.JS_RequestInterface({
+            funcName: 'startPreview',
+            argument: JSON.stringify({
+                cameraIndexCode: cameraIndexCode, //监控点编号
+                streamMode: streamMode, //主子码流标识
+                transMode: transMode, //传输协议
+                gpuMode: gpuMode, //是否开启GPU硬解
+                wndId: wndId //可指定播放窗口
+            })
+        })
+    })
+
+
+    // 标签关闭
+    // $(window).unload(function () {
+    //   if (oWebControl != null) {
+    //     oWebControl.JS_HideWnd() // 先让窗口隐藏，规避可能的插件窗口滞后于浏览器消失问题
+    //     oWebControl.JS_Disconnect().then(
+    //       function () {
+    //         // 断开与插件服务连接成功
+    //       },
+    //       function () {
+    //         // 断开与插件服务连接失败
+    //       }
+    //     )
+    //   }
+    // })
+    // 标签关闭
+    $(window).on("unload", function () {
+        if (oWebControl != null) {
+            oWebControl.JS_HideWnd();   // 先让窗口隐藏，规避可能的插件窗口滞后于浏览器消失问题
+            oWebControl.JS_Disconnect().then(function () {  // 断开与插件服务连接成功
+            },
+                function () {  // 断开与插件服务连接失败
+                });
+        }
+    })
+
+    //播放函数
+    function PalyVideo(cameraIndexCode) {
+
+        var streamMode = 0;                                     //主子码流标识：0-主码流，1-子码流
+        var transMode = 1;                                      //传输协议：0-UDP，1-TCP
+        var gpuMode = 0;                                        //是否启用GPU硬解，0-不启用，1-启用
+        var wndId = -1;                                         //播放窗口序号（在2x2以上布局下可指定播放窗口）
+
+        cameraIndexCode = cameraIndexCode.replace(/(^\s*)/g, "");
+        cameraIndexCode = cameraIndexCode.replace(/(\s*$)/g, "");
+
+        oWebControl.JS_RequestInterface({
+            funcName: "startPreview",
+            argument: JSON.stringify({
+                cameraIndexCode: cameraIndexCode,                //监控点编号
+                streamMode: streamMode,                         //主子码流标识
+                transMode: transMode,                           //传输协议
+                gpuMode: gpuMode,                               //是否开启GPU硬解
+                wndId: wndId                                     //可指定播放窗口
+            })
+        })
+    }
+</script>

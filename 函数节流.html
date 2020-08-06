@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height:5000px;">
+    
+</body>
+</html>
+<script>
+  var throttle = function(func, delay) {
+            var prev = Date.now(); //开始时间
+            console.log('开始时间1：'+prev);
+            
+            return function() {
+                var context = this;    //上下文this
+                var args = arguments;  //参数
+                var now = Date.now();   //现在时间
+                if (now - prev >= delay) {
+                    func.apply(context, args);  //改变handler的this指向为当前函数this 并且立即执行
+                    prev = Date.now();
+                    console.log('开始时间2：'+prev);
+                }
+            }
+        }
+        function handle() {
+            console.log(Math.random());
+        }
+        window.addEventListener('scroll', throttle(handle, 1000));
+</script>

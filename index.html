@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // new Promise((resolve,reject)=>{
+    //     console.log('同步1')
+    //     reject(2)   //失败
+    //   // resolve(2)
+    // }).then(
+    //     value=>{
+    //         console.log('这是then1')
+    //     },
+    //     // reason=>{throw reason}
+    // ).then(
+    //     value=>{
+    //         console.log('这是then2')
+    //     },
+    //     // reason=>{throw reason}
+    // ).catch(
+    //     reason=>{
+    //         console.log('进入catch')
+    //         console.log(reason)
+    //         return new Promise(()=>{
+    //             console.log('失败的promise')
+    //         })   // 返回一个pending状态的promise ，后面的链式调用就不会继续执行
+    //     }
+    // ).then(   // 这里面将不会继续执行
+    //     value=>{
+    //      console.log('这是then3')   
+    //     },
+    //     reason=>{
+    //         console.log('then3失败')
+    //     }
+    // )
+
+    // new Promise((resolve, reject)=>{
+    //     console.log("执行任务1（同步）")
+    //     setTimeout(()=>{
+    //          console.log("执行任务2（异步）")
+    //          resolve(2)
+    //     },1000)
+    // }).then(
+    //     value =>{
+    //         console.log("任务2的结果");
+    //        console.log("执行任务3（同步）");
+    // //resolve(3)   这里会报错，因为.then() 需要返回promise对象
+    //  return   Promise.resolve(3)
+    //   //  return 4  //
+    //     }
+    // ).then(
+    //     value=>{
+    //         console.log("接受任务3的结果"+value)
+    //         return new Promise((resolve,reject)=>{
+    //             setTimeout(()=>{
+    //                 console.log("执行任务4（异步）")
+    //                 resolve(4)
+    //             })
+    //         })
+    //     }
+    // ).then(
+    //     value=>{
+    //         console.log("接收任务4的结果")
+    //     }
+    // )
+
+
+    // Promise.resolve(1) 
+    // .then(2) 
+    // .then(Promise.resolve(3)) 
+    // .then(res=>{console.log(res)})
+
+    // function red(){
+
+    //      setInterval(()=>{
+    //        console.log('红灯亮')
+    //      },30000)
+    //  }
+    //  function green(){
+    //      setInterval(()=>{
+    //        console.log('绿灯亮')
+    //      },20000)
+    //  }
+    //  function yellow(){
+    //      setInterval(()=>{
+    //        console.log('黄灯亮')
+    //      },10000)
+    //  }
+    //    for(let i=0;i<2;i++){
+
+    //      new Promise((resolve,reject)=>{
+
+    //         resolve()
+    //        })
+    //        .then(res=>{
+    //         console.log('第'+i+'次循环')
+    //          return   red() 
+
+    //            })
+    //            .then(res=>{
+    //             return  green()
+
+    //            })
+    //            .then(res=>{
+    //             return     yellow()
+
+    //            })
+    //    }
+
+
+    // function A() {
+
+    // }
+
+    // function B() {
+    //     setTimeout(function () {
+    //         console.log('b');      
+    //     }, 1000);
+    // }
+    // Promise.resolve().then(()=>{
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(function () {
+    //         console.log('a');
+    //         resolve()
+    //     }, 3000);
+
+    //     })
+    // })
+    // .then(()=>{
+    //     B()  
+    // })
+//   async function doAsync(){
+//    await setTimeout( () =>{
+            
+//             return Promise.resolve()    
+//             console.log('a');      
+//         }, 3000);
+       
+
+//     }
+//     doAsync().then(()=>{
+//         B() 
+//     })
+    // const first = () => (new Promise((resolve, reject) => {
+    //     console.log(3);
+    //     let p = new Promise((resolve, reject) => {
+    //         console.log(7);
+    //         setTimeout(() => {
+    //             console.log(5);
+    //             resolve(6);
+    //         }, 0)
+    //         resolve(1);
+    //     });
+    //     resolve(2);
+    //     p.then((arg) => {
+    //         console.log(arg);
+    //     });
+
+    // }));
+
+    // first().then((arg) => {
+    //     console.log(arg);
+    // });
+    // console.log(4);
+
+    // 3 7 1 5 2 4 
+    // 3 7 4 1 2  5
+    // let obj={a:1,b:2}
+    // for(let key in obj){
+    //     console.log(obj[key])
+    //     debugger
+    //     console.log(obj.key)
+    // }
+    // let arr=[1,2,3,4]
+
+    //    let obj=arr.entries()
+    //    console.log(obj);
+    //    console.log([...obj]);
+    // var obj = {
+    //     a: () => {
+    //         console.log(this) //window
+    //     }
+    // }
+// let str='juejin'
+// debugger
+//     let arr = Array.from('juejin'); 
+// console.log(arr); //["j", "u", "e", "j", "i", "n"]
+// let arr=[1,2,3,4,5,6,7,8]
+// arr.forEach(item => {
+//     if(item%2===0){
+//         return
+//     }
+//     console.log(item);  
+// });
+
+
+// var o = {p: 42, q: true};
+// var {:a, b} = {p: 42, q: true};
+
+// console.log(a); // 42
+// console.log(b); // true
+// const a={a:null}  //
+// console.log(a);  
+// a.a=1   // var a.a=1  var变量提前声明 
+// 'use strict';
+// //var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]]);
+// var m = new Map();
+// m.set('Adam', 67);
+// m.set('Adam', 88);
+// //var s = new Set();
+// var s = new Set([1, 2, 3, 3,'3']);
+// var o =new Object()
+// var map=[['Michael', 95], ['Bob', 75], ['Tracy', 85]]
+// console.log(m);
+// console.log(s);
+// console.log(o);
+// console.log(map);
+// console.log('你的浏览器支持Map和Set！');
+const extname = (filename) => {
+  /* TODO */
+  let arr= filename.split('.')
+  return arr[arr.length-1]
+}
+console.log(extname('emoji.png'));
+
+</script>
+
+
+<!-- function A() {
+    setTimeout(function () {
+        console.log('a');
+    }, 3000);
+}
+
+function B() {
+    setTimeout(function () {
+        console.log('b');
+    }, 1000);
+}
+
+A();
+B();
+
+// b
+// a
+ -->
+ <!-- const data = { key1: "a", key2: "b", key3: "c" };
+for (let key in data) {
+  console.log(key); // key1 key2 key3 
+  console.log(data[key]); // a b c   
+}
+const data = ["a", "b", "c", "d"];
+for (let index in data) {
+  console.log(index);  // 0 1 2 3  
+} -->
+

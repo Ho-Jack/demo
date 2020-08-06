@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+
+    function go() {
+        console.log('go');
+        return
+    }
+
+    function XX() {
+        go()
+        console.log('go函数内的return,无法中断XX函数执行')
+        if (true) {
+            console.log('进入if')
+            return
+        }
+        console.log('XX-2222222')
+    }
+    XX()
+</script>

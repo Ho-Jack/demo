@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+// function Person() {  }
+// var person =new Person()
+// console.log(person.__proto__);
+// console.log(Person.prototype);
+// console.log(person.constructor)
+// console.log(Person.prototype.constructor);
+
+// let mydate=new Date()
+// console.log(mydate.__proto__);
+// console.log(Date.prototype);
+
+
+function Person(obj) {
+	this.name = obj.name
+	this.age= obj.age
+}
+// 原型方法
+Person.prototype.say = function() {
+  console.log('你好,', this.name )
+}
+// p为实例化对象，new Person()这个操作称为构造函数的实例化
+let p = new Person({name: '番茄', age: '27'})
+console.log(p.name, p.age)
+p.say()
+
+</script>

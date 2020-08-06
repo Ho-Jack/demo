@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+	<head>
+		<meta charset="UTF-8" />
+		<title>滚动一定距离导航栏固定</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-size: 40px;
+				font-family: '微软雅黑';
+				text-align: center;
+				line-height: 100px;
+				width: 100%;
+			}
+			/*顶部*/
+			
+			.top {
+				height: 100px;
+				background: blue;
+			}
+			/*导航栏部分*/
+			
+			.nav {
+				height: 100px;
+				background: red;
+			}
+			/*导航栏变异部分*/
+			
+			.nav2 {
+				height: 100px;
+				background: yellowgreen;
+			}
+			/*测试部分*/
+			
+			.test {
+				background: #6495ED;
+				height: 2000px;
+				padding-top: 100px;
+			}
+			
+			.fixnav {
+				position: fixed;
+				top: 0px;
+				left: 0px;
+			}
+		</style>
+	</head>
+ 
+	<body>
+		<div class="top">顶部</div>
+		<div class="nav">导航栏部分</div>
+		<div class="nav2">导航栏变异部分</div>
+		<div class="test">这个区域仅仅是用于测试的</div>
+	</body>
+ 
+</html>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$(".nav2").hide();
+		$(window).scroll(function() {
+			if($(document).scrollTop() >= 200) {
+				$(".nav2").addClass("fixnav").slideDown();
+			} else {
+				$(".nav2").hide();
+			}
+		})
+	})
+</script>

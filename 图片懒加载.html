@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 8000px;">
+    <div style="height: 1800px ;background:yellowgreen;"></div>
+    <div  id="target" style="height: 300px;width:300px;background:black;"></div>
+</body>
+</html>
+<script>
+    function isElementInViewport (el) {
+  const { top, height, left, width,bottom } = el.getBoundingClientRect()
+  const w = window.innerWidth || document.documentElement.clientWidth //视口宽度
+  const h = window.innerHeight || document.documentElement.clientHeight //视口高度
+  console.log(`视口宽度${w},视口高度${h}`);
+  console.log(`top:${top},height:${height},left:${left},width:${width},bottom:${bottom}`);
+  return (
+    top <= h &&
+    (top + height) >= 0 &&
+    left <= w &&
+    (left + width) >= 0
+  )
+}
+let target =document.getElementById('target')
+window.addEventListener('click',()=>{
+    isElementInViewport (target)
+})
+// function throttle (fn, interval = 500) {
+//   let timer = null
+//   let firstTime = true
+
+//   return function (...args) {
+//     if (firstTime) {
+//       // 第一次加载
+//       fn.apply(this, args)
+//       return firstTime = false
+//     }
+
+//     if (timer) {
+//       // 定时器正在执行中，跳过
+//       return
+//     }
+
+//     timer = setTimeout(() => {
+//       clearTimeout(timer)
+//       timer = null
+//       fn.apply(this, args)
+//     }, interval)
+
+//   }
+// }  
+function LazyLoad (images, options = {}) {
+  if (!(this instanceof LazyLoad)) {
+    return new LazyLoad(images, options)
+  }
+  this.setting = Object.assign({}, { src: 'data-src', srcset: 'data-srcset', selector: '.lazyload' }, options)
+  this.images = images || document.querySelectorAll(this.setting.selector)
+  this.observer = null
+  this.init()
+}
+
+LazyLoad.prototype.init = function () {
+  let self = this
+  let observerConfig = {
+    root: null,
+    rootMargin: '0px',
+    threshold: [0]
+  }
+  this.observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const target = entry.target
+      if (entry.intersectionRatio > 0) {
+        this.observer.unobserve(target)
+        const src = target.getAttribute(this.setting.src)
+        const srcset = target.getAttribute(this.setting.srcset)
+        if ('img' === target.tagName.toLowerCase()) {
+          if (src) {
+            target.src = src
+          }
+          if (srcset) {
+            target.srcset = srcset
+          }
+        } else {
+          target.style.backgroundImage = `url(${src})`
+        }
+      }
+    })
+  }, observerConfig)
+
+  this.images.forEach(image => this.observer.observe(image))
+}
+</script>

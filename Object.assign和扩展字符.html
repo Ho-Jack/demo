@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let obj1 = { a: 1 }
+    let obj2 = { b: 2 }
+    console.log(Object.assign(obj1, obj2));
+    console.log({ ...obj1, ...obj2 });
+    console.log({ obj1, ...obj2 });
+
+</script>
+<style>
+    .box {
+        width: 600px;
+        height: 300px;
+        border: 3px solid #ccc;
+        background-color: #8064A2;
+    }
+
+    span {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        border: 3px solid #ccc;
+        background-image: url(css/img/sidebar.png);
+        background-repeat: no-repeat;
+        margin: 5px;
+    }
+
+    .icon1 {
+        background-position: 0 0;
+    }
+
+    .icon2 {
+        background-position: -40px 0;
+    }
+
+    .icon3 {
+        background-position: 0 -25px;
+    }
+
+    .icon4 {
+        background-position: -40px -25px;
+    }
+</style>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+class User{
+    constructor(name,pass){
+        this.name=name
+        this.pass=pass
+    }
+    showName(){
+        console.log(this.name);       
+    }
+    showPass(){
+        console.log(this.pass);
+        
+    }
+}
+let aa=new User('陈','123')
+console.log(aa);
+class VipUser extends User {
+   //constructor是一个构造方法，用来接收参数
+constructor(name, pass, level) {
+         super(name, pass)  //调用父类的 constructor(name,pass)
+         this.level = level
+    }
+    showLevel(){
+        console.log(this.level)
+    }
+}
+
+v1 = new VipUser('blue', '123', 3)
+v2 = new VipUser('blue2', '123', 3)
+console.log(v1);
+console.log(v2);
+v1.showLevel()
+</script>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // function *go(a){
+    //     console.log(1);
+    //     // yield语句只是个标识符，并没有返回值
+    //     // yield左边等于等于next()传来的参数值，没传参则为undefined。yield右边的是next()的返回值。
+    // debugger
+    //     let b = yield a;
+
+    //     console.log(2);
+    //     let c = yield b;
+    //     console.log(3);
+    //     return c;
+    // }
+
+    // let iterator = go('aaa');
+
+    // let r1 = iterator.next();   //第一次next不用传参，没有意义
+    //                            console.log(r1);    //{ value: 'aaa', done: fa lse }
+    // let r2 = iterator.next('bbb');
+    // console.log(r2)     //{ value: 'bbb', done: false }
+    // let r3 = iterator.next();
+    // console.log(r3)     //{ value: undefined, done: true }
+    // function getRandom () {
+    //   return new Promise(resolve => {
+    //     setTimeout(() => resolve(Math.random() * 10 | 0), 1000)
+    //   })
+    // }
+
+    // async function main () {
+    //   let num1 = await getRandom()
+    //   console.log(num1);
+
+    //   let num2 = await getRandom()
+    //   console.log(num2);
+
+    //   return num1 + num2
+    // }
+    // main ()
+
+    //console.log(`got data: ${await main()}`)
+
+
+    /* --------------------------------------------------------------------- */
+    function A() {
+        console.log('AAAAAA');
+        //  return Promise.reject('函数A 失败')
+        return Promise.resolve('函数A 成功')
+    }
+    function B() {
+        console.log('BBBBBB');
+        // return Promise.reject('函数B 失败')
+        return Promise.resolve('函数B 成功')
+    }
+
+    function C() {
+        console.log('CCCCCC');
+        return '普通函数'
+    }
+    async function GO() {
+        try {
+            let result1 = await A()
+            console.log(result1);
+
+            let result2 = await B()
+            console.log(result2);
+
+            let result3 = await C()
+            console.log(result3);
+        } catch (error) {
+            console.log('被caech 捕获');
+            console.log(error);
+        }
+    }
+    // function GO(){
+    //     A().then(val=>{
+    //         /* A 函数运行成功，并获取A函数的val */
+    //         B().then(val=>{
+    //           /* B函数运行成功 并获取B 函数的val */
+    //         })
+    //     })
+    // }
+
+
+    //GO()
+
+
+
+    async function demo() {
+        await setTimeout(() => {
+            console.log('AAA:' + new Date().getSeconds());
+        }, 4000)
+        await setTimeout(() => {
+            console.log('BBB:' + new Date().getSeconds());
+
+        }, 3000)
+        console.log('CCC:' + new Date().getSeconds());
+    }
+    //    demo()
+
+
+    function do1() {
+        console.log('进入函数：' + new Date().getSeconds());
+        
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log('AAA:' + new Date().getSeconds());
+                resolve('AAA传递给下一个')
+            }, 4000)
+        })
+    }
+    // do1().then(res => {
+    //     console.log(res+ new Date().getSeconds());
+    // })
+
+   async function do2() {
+        console.log('进入函数：' + new Date().getSeconds());
+        setTimeout(() => {
+                console.log('AAA:' + new Date().getSeconds());
+                return('AAA传递给下一个')
+            }, 4000)
+       
+    }
+    do2().then(res => {
+        console.log(res);
+        
+        console.log( new Date().getSeconds());
+    })
+
+</script>

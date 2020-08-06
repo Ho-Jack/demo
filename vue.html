@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in obj">
+              {{ item }}
+            </li>
+          </ul>
+          <button @click = addObj>添加Obj</button>
+    </div>
+</body>
+</html>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    obj: {
+          a: "obj.a",
+          b:''
+        }
+  },
+  methods: {
+          addObj() {
+            this.obj.b = 'obj.b'   //因为Vue最初实例化的时候，Obj中没有属性b
+           // this.$set(‘对象名’,要修改的属性名,属性值),这样新添加的属性值会被Vue监听到并且同步渲染到页面上
+            //this.$set(this.obj, 'b' ,'obj.b')
+              console.log(this.obj)
+          }
+      }
+
+
+})
+</script>

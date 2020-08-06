@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="doDeep()">拷贝</button>
+</body>
+
+</html>
+<script>
+    let obj1 = {
+        count: 1,
+        deep:{count:2}  //存的是内存地址
+    }
+    let obj2 = {
+        count1: 3,
+    }
+    //let shallowCopy = { ...obj1 }
+   // let shallowCopy =obj1
+    let deepCopy = { ...obj1, ...obj2 }
+    console.log(obj1);
+  //  console.log(shallowCopy);
+   console.log(deepCopy);
+    function doDeep() {
+        obj1.count=11
+        obj1.deep.count = 4
+        console.log(obj1);
+      //  console.log(shallowCopy);
+        console.log(deepCopy);
+    }
+</script>

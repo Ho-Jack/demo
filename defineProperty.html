@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+let Person ={}
+let temp=null
+Object.defineProperty(Person,'name',{
+ get:function(){
+     return '我是'+temp
+ },
+ set: function(val){
+     temp=val
+    }
+})
+Person.name="AA"
+console.log(Person.name) //我是AA
+</script>

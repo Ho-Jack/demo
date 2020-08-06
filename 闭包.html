@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" onclick="foo()()" value="按钮" />
+</body>
+
+</html>
+<script>
+    // function f1(){
+    //     var n=99
+    //     add=function(){ return n=++n}
+    //      function f2(){
+    //        console.log(n);     
+    //     }
+    //     return f2
+    // }
+    // var result=f1()
+    // result()
+    // //add()
+    // result()
+    // function box(){
+    //     var arr = [];
+    //     for(var i=0;i<5;i++){
+    //         arr[i] = function(){
+    //              return i;    
+    //           }         
+    //        }                       
+    //      return arr;
+    // }
+    // alert(box()[1]); 
+  
+  
+  
+  
+  
+  
+    // function foo() {
+    //     var local = 1
+    //     console.log('进入函数1');
+    //     console.log(local)
+    //     return function () {
+    //         console.log('进入函数2');
+    //         console.log(local)
+    //         ++local
+    //           return local
+    //     }
+    // }
+  //  foo()
+
+
+
+
+
+
+ //   foo()
+  //  var func = foo()
+  //    func()
+  //    func()
+//foo()()
+//foo()()
+// function f1(){
+//     var n =99
+//     console.log('进入函数');
+//     add =function () {  return n=(n+1) }   //匿名函数
+//   function f2 (){
+//           n++
+//         console.log(n)
+//   }
+//  return f2
+// }
+//   var result = f1()    //f1()函数的返回值是 f1函数  
+// result()              //99
+// //add()                 //100 ( add()不加return 返回的是undefined，但实际运行了)
+// result()              //100
+
+
+
+// function count() {
+//         let arr = [];
+//         console.log('start');
+//         for (var i=1; i<=3; i++) {  
+//             console.log('i:'+i);       //被保护的变量会一直保存在内存中，直到被释放
+//             arr.push(function () {     
+//                 console.log('函数内的i:'+i);   //返回的函数只有被执行了才会执行，所以f1，f2，f3被执行时，i已经变成了4
+//                 return i * i;
+//             });
+//         }
+//         return arr;
+//     }
+
+//     let results = count();  //返回一个数组
+//     let f1 = results[0];
+//     let f2 = results[1];
+//     let f3 = results[2];
+//     console.log(f1());
+//     console.log(f2());
+//     console.log(f3());            
+
+
+
+/* 6-22 */
+function foo(x) {
+    var tmp = 3;
+    return function (y) {
+      debugger
+        alert(x + y + (++tmp));
+    }
+}
+var bar = foo(2); // bar 现在是一个闭包
+bar(10);
+
+
+
+
+
+
+
+
+
+</script>
