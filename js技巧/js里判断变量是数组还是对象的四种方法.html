@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+var obj = { }
+var arr = [];
+//用constructor判断,arr和obj本身没有constructor属性,但它的原型上有
+console.log(arr.constructor === Array)
+console.log(obj.constructor === Array);
+
+console.log('用instanceof判断');
+   //用instanceof判断
+   console.log(arr instanceof Array);
+	console.log(obj instanceof Array);
+console.log('Object.prototype.toString.call()');
+    console.log(Object.prototype.toString.call(arr));  
+	console.log(Object.prototype.toString.call(obj));
+console.log('  Array.isArray() ');
+console.log(Array.isArray(arr));
+console.log(Array.isArray(obj));
+
+
+    function isArrayFn(value) {
+        if (typeof Array.isArray === "function") {
+            return Array.isArray(value);
+        } else {
+            return Object.prototype.toString.call(value) === "[object Array]";
+        }
+    }
+
+</script>

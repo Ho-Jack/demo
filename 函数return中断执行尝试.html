@@ -22,6 +22,7 @@
     }
 
     function XX() {
+        console.log('执行XX函数');
         go()
         console.log('go函数内的return,无法中断XX函数执行')
         if (true) {
@@ -31,4 +32,22 @@
         console.log('XX-2222222')
     }
     XX()
+
+
+
+    function YY() {
+        console.log('执行YY函数');
+        function go() {
+            console.log('go');
+            return
+        }
+         go()
+        console.log('go函数内的return,无法中断XX函数执行')
+        if (true) {
+            console.log('进入if')
+            return
+        }
+        console.log('YY函数停止执行')
+    }
+//    YY()
 </script>

@@ -19,7 +19,8 @@ return tmp + item
 })
 console.log(result);
 
-var  result2=arr.find(item=>{
+var  result2=arr.find((item,index)=>{
+    console.log("find的index："+index);
     return  item>3
 })
 console.log(result2);

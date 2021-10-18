@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>
 <script>
-    function absolute(prev,curr){
+    function absolute(prev, curr) {
         console.log(prev);
         console.log(curr);
-        return Math.abs(prev)+Math.abs(curr)
+        return Math.abs(prev) + Math.abs(curr)
     }
     var arr4 = [-2];
     //不传initVal,观察差别
     //var result4 = arr4.reduce(absolute);
     //传initVal,
-    var result5 = arr4.reduce(absolute,0);
-   // console.info('result4',result4) //-2
-    console.info('result5',result5) //2
+    var result5 = arr4.reduce(absolute, 0);
+    // console.info('result4',result4) //-2
+    console.info('result5', result5) //2
+
+
+    let arr = ['a', 'b', 'c', 'd', 'e']
+    let pre = arr.reduce((pre, curr) => {
+        pre[curr] = { curr: curr, a: 1 }
+        console.log(pre);
+        console.log(curr);
+        return pre
+    }, {})
+    console.log(pre);
+
 </script>

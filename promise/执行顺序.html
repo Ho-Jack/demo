@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    const arr=[1,2,3]
+arr.forEach( item => console.log(item))  //同步回调,不会放入回调队列,而是立即执行
+console.log('forEatch()之后')
+setTimeout(() =>{    //异步回调,会放入回调队列, 所有同步执行完后才可能执行
+console.log('timout 回调')
+}, 0)
+console.log('setTimeout 之后')
+</script>
