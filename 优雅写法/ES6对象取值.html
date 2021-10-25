@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /*
+    ?.
+    */
+    const obj={}
+    if(obj){
+        console.log('非空')
+    }
+    const name = obj && obj.name;
+    const name=obj?.name
+    console.log(name)  
+
+    const obj2={}
+
+    const name2 = obj2 && obj2.name;
+    const name3= obj2.name && null;
+    //const name=obj?.name
+    console.log(`name2:${name2}`)  
+
+
+
+   /*
+    ??
+    */
+    let user = {name:'aaa'};
+    let userAge = user?.age ?? "18";
+    console.log(userAge); // 18
+
+
+</script>
