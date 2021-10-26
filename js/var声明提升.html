@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>var 声明变量，会在所有代码执行前面声明和初始化（不赋值）</p>
+    <div>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    </div>
+
+    <p>let 声明变量，块级作用域</p>
+    <div>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    </div>
+    <p>将变量封装到函数内，限制作用域</p>
+    <div>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    </div>
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+
+        // var 声明变量，会在所有代码执行前面声明和初始化（不赋值）
+        const btn1 = document.getElementsByTagName('div')[0].children
+        for (var i = 0; i < btn1.length; i++) {
+            btn1[i].onclick = function () {
+                alert(i)
+            }
+        }
+
+        // let 声明变量，块级作用域
+        const btn2 = document.getElementsByTagName('div')[1].children
+        for (let i = 0; i < btn2.length; i++) {
+            btn2[i].onclick = function () {
+                alert(i)
+            }
+        }
+
+        // 将变量封装到函数内，限制作用域
+        //立即执行函数 作用：创建一个独立的作用域，避免全面局污染
+        const btn3 = document.getElementsByTagName('div')[2].children
+        for (let i = 0; i < btn3.length; i++) {
+            (function (i) {
+                btn3[i].onclick = function () {
+                    alert(i)
+                }
+            })(i)
+        }
+    }
+
+</script>

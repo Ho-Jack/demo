@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+  /**
+   * 普通函数的this
+  this 永远指向最后调用它的那个对象
+   **/
+  {
+
+    var a = 1;
+    function fun() {
+      var a = 2;
+      return this.a;
+    }
+    fun();//1  这里this 指向window  所以是1 
+    //window.fun()  === fun()
+  }
+
+  /*严格模式下 this 不能指向window  而是指向undefined*/
+  {
+    var a = 1;
+    function fun() {
+      'use strict';
+      var a = 2;
+      return this.a;  //this指向undefined;
+    }
+  //  fun();//😨报错 Cannot read property 'a' of undefined 
+  }
+
+  {
+   
+    var a = 2000
+    function fun() {
+      'use strict';
+      var a = 1000
+      var obj = {
+        a: 1,
+        c: this.a + 2 //严格模式下这块报错 Cannot read property 'a' of undefined
+      }
+      return obj.c;
+    }
+    console.log(fun());
+  }
+
+
+</script>

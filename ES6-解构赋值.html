@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let obj1 = { my: 'obj1' }
+    let obj2 = { my: 'obj2' }
+    let obj3 = { my: 'obj3' }
+    const copyObj = { name: 'a', age: 18, job: 'student' }
+    //方法1：  这个方法有点蠢，但是可以配置需要哪些参数
+    {
+        const { name, age, job } = copyObj
+        obj1 = { ...obj1, ...{ name, age, job } }
+        console.dir(obj1)
+    }
+
+    //方法2：
+    {
+        obj2 = { ...obj1, ...copyObj }
+        console.dir(obj2)
+    }
+    //原始方法：
+    {
+        obj3.name = copyObj.name
+        obj3.age = copyObj.age
+        obj3.job = copyObj.job
+        console.dir(obj3)
+    }
+    //原始方法改进 v1.0
+    {
+        const { name, age, job } = copyObj
+        obj3.name = name
+        obj3.age = age
+        obj3.job = job
+        console.dir(obj3)
+    }
+    //原始方法改进 v2.0
+    {
+        const { name, age, job } = copyObj
+        obj3 = { ...obj3, ...{ name, age, job } }
+        console.dir(obj3)
+    }
+</script>
