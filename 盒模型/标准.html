@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .box1 {
+        box-sizing: content-box;
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+        background-color: blue;
+    }
+    .box2 {
+        box-sizing: border-box;
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+        background-color: blue;
+    }
+</style>
+
+<body>
+    <div class='box1'>
+        W3C标准盒模型box-sizing: content-box：
+        元素的宽度等于style里的width+margin+border+padding宽度
+    </div>
+    <div class='box2'>
+        IE盒模型box-sizing: border-box：
+        元素的宽度等于style里的width宽度
+    </div>
+</body>
+
+</html>
+<script>
+
+</script>

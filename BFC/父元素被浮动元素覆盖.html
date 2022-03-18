@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick='openBFC()' type='button'>开启父元素BFC</button>
+    <div class="div1">父父父父父父父自适应高宽
+        <div class='div1-2'>浮动元素上方块元素</div>
+        <div class="div1-1">
+            子子子子子（浮动元素）
+        </div>
+    </div>
+    <div class="div2">相邻块元素</div>
+    <!-- <div class="div2"></div> -->
+</body>
+
+</html>
+<script>
+    window.onload = () => {
+        openBFC = () => {
+            let div1 = document.querySelector('.div1')
+            if(div1.style.overflow=='hidden'){
+                div1.style.overflow='visible'
+                return
+            }
+            div1.style.overflow='hidden'
+
+        }
+    }
+</script>
+
+<style>
+    body {
+        background-color: beige;
+    }
+
+    .div1 {
+        background-color: bisque;
+        margin: 50px;
+        border: 1px solid;
+    }
+
+    .div2 {
+        width: 200px;
+        height: 200px;
+        background-color: darkkhaki;
+        margin: 50px;
+        border: 1px solid;
+    }
+
+    .div1-1 {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+        float: left;
+    }
+
+    .div1-2 {
+        width: 100px;
+        height: 100px;
+        background-color: darkgoldenrod;
+    }
+</style>

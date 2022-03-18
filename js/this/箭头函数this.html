@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // 箭头函数this的指向（外部函数的this就是箭头函数的this）：
+  var a = 1;
+  var obj = { a: 2 };
+  function fun() {
+    var a = 3;
+    let f = () => console.log(this.a);
+    //箭头函数在fun函数里面，（箭头函数的this=fun函数的this）
+    f();
+  };
+  fun();           //1    以函数调形式用this是window,
+  fun.call(obj);  //2    this指向obj
+
+
+  const objFun = {
+    a: 3,
+    b: () => console.log(this.a)
+  };
+  objFun.b()  //1   在对象属性定义(this为window)
+
+  const objFun = {
+    a: 3,
+    b: () => console.log(this.a)
+  };
+  objFun.b()  //在对象属性定义(this为window)
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  {
+    function* go(a) {
+      console.log(1);
+      // yield语句只是个标识符，并没有返回值
+      // yield左边等于等于next()传来的参数值，没传参则为undefined。yield右边的是next()的返回值。
+      let b = yield a;
+      console.log(2);
+      let c = yield b;
+      console.log(3);
+      return c;
+    }
+
+    let iterator = go('aaa');
+    console.log(iterator)
+    let r1 = iterator.next();   //第一次next不用传参，没有意义
+    console.log(r1);    //{ value: 'aaa', done: false }
+    let r2 = iterator.next('bbb');
+    console.log(r2)     //{ value: 'bbb', done: false }
+    let r3 = iterator.next();
+    console.log(r3)     //{ value: undefined, done: true }
+  }
+
+  {
+    function* go(a) {
+      console.log(1);
+      yield a;
+      let b
+      console.log(2);
+      yield b;
+      let c
+      console.log(3);
+      return c;
+    }
+
+    let iterator = go('aaa');
+    console.log(iterator)
+    let r1 = iterator.next();   //第一次next不用传参，获取的是generator的参数
+    console.log(r1);    //{ value: 'aaa', done: false }
+    let r2 = iterator.next('bbb');
+    console.log(r2)     //{ value: undefined, done: false }
+    let r3 = iterator.next();
+    console.log(r3)     //{ value: undefined, done: true }
+  }
+
+
+</script>

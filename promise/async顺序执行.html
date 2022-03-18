@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../jquery/jquery.min.js" type='text/javascript'> </script>
+    <title>Document</title>
+</head>
+
+<input type="button" value="do1" onClick='do1()' />
+<input type="button" value="do2" onClick='do2()' />
+<input type="button" value="do3" onClick='do3()' />
+<input type="button" value="do4" onClick='do4()' />
+
+</body>
+
+</html>
+<script type='text/javascript'>
+    $(() => {
+        do1 = () => {
+            fun1 = () => {
+                console.log('do1-fun1-start-1')
+                setTimeout(() => {
+                    console.log('do1-触发了定时setTimeout-3');
+                }, 1000)
+            }
+            fun1()
+            console.log('do1-全局单线程-2')
+        }
+
+
+        do2 = () => {
+            fun1 = async () => {
+                console.log('do2-fun1-start-1')
+                await setTimeout(() => {
+                    console.log('do2-触发了定时setTimeout-3');
+                }, 1000)
+            }
+            fun1()
+            console.log('do2-全局单线程-2')
+        }
+
+
+        do3 = async () => {
+            fun1 = () => {
+                return new Promise((resolve, reject) => {
+                    console.log('do3-fun1-start-1')
+                    setTimeout(() => {
+                        console.log('do3-触发了定时setTimeout-3');
+                        resolve()
+                    }, 1000)
+                })
+
+            }
+            await fun1()
+            console.log('do4-全局单线程-2')
+        }
+
+        /*
+        async await 需要一层层添加 才能最终是同步执行
+        */
+        do4 = async () => {
+            fun1 = () => {
+                return new Promise((resolve, reject) => {
+                    console.log('do4-fun1-start-1')
+                    setTimeout(() => {
+                        console.log('do4-fun1-触发了定时setTimeout-2');
+                        resolve()
+                    }, 1000)
+                })
+
+            }
+
+            fun2 = async () => {
+                await fun1()
+                console.log('fun2')
+            }
+            await  fun2()   //如果这个fun2不添加 awiat 也就不是同步执行
+            console.log('do4-全局单线程-这个是最后执行吗')
+        }
+
+    })
+</script>

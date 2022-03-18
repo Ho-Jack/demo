@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../jquery/jquery.min.js" type='text/javascript'> </script>
+    <title>Document</title>
+</head>
+
+<input type="button" value="do1" onClick='do1()' />
+<input type="button" value="do2" onClick='do2()' />
+<input type="button" value="do3" onClick='do3()' />
+
+
+</body>
+
+</html>
+<script type='text/javascript'>
+    $(() => {
+
+        do1 = () => {
+            function fun1() {
+                console.log('进入函数：' + new Date().getSeconds());
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log('AAA:' + new Date().getSeconds());
+                        resolve('AAA传递给下一个')
+                    }, 1000)
+                })
+            }
+            fun1().then(res => {
+                console.log(res + + new Date().getSeconds());
+            })
+        }
+        //外部函数返回Promise对象,使用async/await 即可同步
+
+        do2 = () => {
+            fun1 = () => {
+                console.log('进入函数：' + new Date().getSeconds());
+                new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log('定时器:' + new Date().getSeconds());
+                        resolve('最后执行吗')
+                    }, 1000)
+                })
+            }
+            fun2 = async () => {
+                let res = await fun1()
+                console.log(res + + new Date().getSeconds())
+            }
+            fun2()
+        }
+        //外部函数未返回Promise对象，外部函数使用async/await关键字，能解决同步问题，
+        //但是外部函数由于没return值，无法使用  `let res = await fun1()` 接收外部函数Promise，resolve的值
+        do3 = () => {
+            fun1 = async () => {
+                console.log('进入函数：' + new Date().getSeconds());
+                await new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log('定时器:' + new Date().getSeconds());
+                        resolve('最后执行吗')
+                    }, 1000)
+                })
+            }
+            fun2 = async () => {
+                let res = await fun1()
+                console.log(res + + new Date().getSeconds())
+            }
+            fun2()
+        }
+
+    })
+</script>

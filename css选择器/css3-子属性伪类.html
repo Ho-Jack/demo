@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>DIV1
+        <span>demo</span>
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>4</p>
+        <p>5</p>
+        <h5 class="myh5">only of type</h5>
+        <h2>myh2 11</h2>
+        <h2 class="myh2">myh2 22</h2>
+        <span>demo2</span>
+    </div>
+
+
+    <div>
+        DIV2
+        <p class='myp'>p1</p>
+        <div class='myp'>p1</div>
+
+    </div>
+</body>
+
+</html>
+<style>
+    p:first-of-type {
+        color: aqua
+    }
+
+    p:last-of-type {
+        color: red
+    }
+
+
+    h5:only-of-type {
+        color: blue
+    }
+
+    .myh5:only-of-type {
+        background-color: aqua;
+    }
+
+    h5:only-child {
+        text-align: center;
+    }
+
+    /* h2:only-child{
+    color:brown
+} */
+
+
+    div {
+        box-sizing: border-box;
+        margin: 10px;
+        width: 100px;
+        height: 100px;
+        padding: 10px;
+    }
+
+    .myp:only-child {
+        color: brown;
+    }
+</style>

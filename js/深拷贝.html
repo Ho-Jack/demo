@@ -11,13 +11,21 @@
 </body>
 </html>
 <script>
-    let str='abcdefg'
-    let  target=str.match(/\w/ig)
-    console.log(target);
+var deepCopy = (obj) => {
+    var ret = {}
+    for (var key in obj) {
+        var value = obj[key]
+        ret[key] = typeof value === 'object' ? deepCopy(value) : value
+    }
+    return ret
+}
     
 
-    let str2= '11{aaa}222{bbb}333{ccc}'
-    let target2=str2.match(/\{[^\}]+\}/ig)
-    console.log(target2);
-
+let obj={
+  count:1,
+  deep:{
+    deepName:'这是deep'
+  }
+}
+console.log(deepCopy(obj))
 </script>
