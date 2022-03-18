@@ -18,6 +18,7 @@ Object.defineProperty(Person,'name',{
      return '我是'+temp
  },
  set: function(val){
+     console.log('修改监听对象属性时触发')
      temp=val
     }
 })

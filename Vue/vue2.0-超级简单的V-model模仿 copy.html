@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    姓名：<span id="spanName"></span>
+    <br>
+    <input type="text" id="inpName">
+</body>
+
+</html>
+<!-- IMPORT JS -->
+<script>
+    let obj = {
+        name: ''
+    };
+    let newObj = {
+        ...obj
+    };
+    //数据劫持
+    Object.defineProperty(obj, 'name', {
+        get() {
+            return newObj.name;
+        },
+        set(val) {
+            newObj.name = val;
+            observe(); //在修改obj的name属性的时候，修改dom，达到双向绑定目的
+        }
+    });
+    function observe() {
+        spanName.innerHTML = newObj.name;
+    }
+    //监听输入框的oninput事件，将输入值赋值到ojb上(触发数据劫持效果)
+    inpName.oninput = function () {
+        obj.name = this.value;
+    };
+</script>

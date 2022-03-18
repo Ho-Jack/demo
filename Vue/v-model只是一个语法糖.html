@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-model 只是语法糖而已 -->
+        <!-- v-model 在内部为不同的输入元素使用不同的property并抛出不同的事件 -->
+        <!-- text和textarea 元素使用value property 和 input事件 -->
+        <!-- checkbox 和radio使用checked  property 和 change事件-->
+        <!-- select 字段将value 作为prop 并将change 作为事件 -->
+        <!-- 注意：对于需要使用输入法(如中文、日文、韩文等)的语言，你将会发现v-model不会再输入法组合文字过程中得到更新 -->
+
+
+
+        <!-- 双向绑定v-model -->
+        <span>msg1:{{msg}}</span>
+        <input v-model="msg" />
+        <!-- 双向绑定模拟 -->
+        <input v-bind:value="msg" v-on:input="msg = $event.target.value" />
+        <br>
+
+        <!-- 组件实现 -->
+        <!-- <currency-input v-model="msg2">
+        </currentcy-input> -->
+        <!--v-model语法糖-->
+        <span>msg2:{{msg2}}</span> 
+        <currency-input :value="msg2" @input="msg2 = arguments[0]"></currency-input>
+
+    </div>
+</body>
+
+
+</html>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
+
+<script>
+    Vue.component('currency-input', {
+        template: `
+        <span>
+            <input ref="input" :value="value" @input="$emit('input', $event.target.value)">
+        </span>
+        `,
+        props: ['value'],
+    })
+    var app = new Vue({
+
+        el: '#app',
+        data() {
+            return {
+                msg: '',
+                msg2: ''
+            }
+        },
+        methods: {
+
+        }
+
+
+    })
+
+</script>
+<style>
+span{
+display: inline-block;
+width:150px;
+}    
+</style>
