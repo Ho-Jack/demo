@@ -31,7 +31,7 @@ var getData2:ConfigFn=function<T>(value:T):T{
   return value;
 }
 getData2<string>('张三');
-getData2<string>(1243);  //错误
+// getData2<string>(1243);  //错误
 getData2<number>(1243);  //正确
 
 }
