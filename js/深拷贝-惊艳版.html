@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <input type="button" onclick="letgo()" value="深拷贝"></body> 
+</body>
+</html>
+<script>
+/**
+ * 深拷贝
+ * @param {Object} obj 要拷贝的对象
+ * @param {Map} map 用于存储循环引用对象的地址
+ * return 对象
+ */
+
+ function deepClone(obj = {}, map = new Map()) {
+   console.log(map);
+  if (typeof obj !== "object") {
+    return obj;
+  }
+   //递归时触发，如
+  if (map.get(obj)) {
+    console.log('11');
+    return map.get(obj);
+  }
+  // 对需要深拷贝Object/Array初始化返回结果
+  let result = {};
+  if (
+    obj instanceof Array ||
+    // 加 || 的原因是为了防止 Array 的 prototype 被重写，Array.isArray 也是如此
+    Object.prototype.toString(obj) === "[object Array]"
+  ) {
+    result = [];
+  }
+    
+  // 防止循环引用
+  map.set(obj, result);
+  for (const key in obj) {
+    // 保证 key 不是原型属性
+    if (obj.hasOwnProperty(key)) {
+      // 递归调用
+      result[key] = deepClone(obj[key], map);
+    }
+  }
+
+  // 返回结果
+  return result;
+}
+
+let myobj={
+  a:1,
+  b:[1,2,3,4],
+  c:{
+    c_a:1,
+    c_b:[1,2,3,4],
+    a:1
+    
+  }
+}
+
+//浅拷贝
+let lowClone=myobj
+console.log(lowClone)
+let letgo=()=>{
+ let result=  deepClone(myobj)
+ console.log(result) 
+}
+</script>

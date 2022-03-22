@@ -11,29 +11,47 @@
     .box1 {
         box-sizing: content-box;
         margin: 10px;
-        width: 200px;
-        height: 200px;
+        width: 400px;
+        height: 400px;
         padding: 10px;
-        background-color: blue;
+        background-color: #b8b8b8;
     }
     .box2 {
         box-sizing: border-box;
         margin: 10px;
-        width: 200px;
-        height: 200px;
+        width: 400px;
+        height: 400px;
         padding: 10px;
-        background-color: blue;
+        background-color: #b8b8b8;
     }
 </style>
 
 <body>
     <div class='box1'>
-        W3C标准盒模型box-sizing: content-box：
-        元素的宽度等于style里的width+margin+border+padding宽度
+        W3C标准盒模型 <br/>
+        box-sizing: content-box：<br/>
+        元素的宽度等于style里的width+border+padding宽度<br/>
+        style{<br/>
+            box-sizing: border-box;<br/>
+            margin: 10px;<br/>
+            width: 400px;<br/>
+            height: 400px;<br/>
+            padding: 10px;<br/>
+        }<br/>
+        真实宽度：420px== width+border+padding
     </div>
     <div class='box2'>
-        IE盒模型box-sizing: border-box：
-        元素的宽度等于style里的width宽度
+        IE盒模型<br/>
+        box-sizing: border-box：<br/>
+        元素的宽度等于style里的width宽度<br/>
+        style{<br/>
+            box-sizing: border-box;<br/>
+            margin: 10px;<br/>
+            width: 400px;<br/>
+            height: 400px;<br/>
+            padding: 10px;<br/>
+        }<br/>
+        真实宽度：  400px === style的width
     </div>
 </body>
 
