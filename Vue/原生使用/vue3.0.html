@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="https://unpkg.com/vue@next"></script>
+     <!-- 引入 http-vue-loader -->
+     <script src="https://unpkg.com/http-vue-loader"></script>
+  <title>单页面使用Vue</title>
+</head>
+
+<body>
+  <div id="app">
+      {{ state }}
+    <Child></Child>
+  </div>
+</body>
+
+<script>
+  import Child from './child.vue'
+
+  const { createApp, reactive, toRefs } = Vue;
+  const data = reactive({
+    state: 12
+  })
+  const app = createApp({
+    setup() {
+      return {
+        ...toRefs(data)
+      }
+    }
+  });
+    // 使用httpVueLoader
+  app.use(httpVueLoader);
+  app.mount("#app");
+</script>
+
+</html>

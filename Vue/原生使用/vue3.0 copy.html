@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.js"></script>
+
+  <title>单页面使用Vue</title>
+</head>
+
+<body>
+  <div id="app">
+    {{ state }}
+    <!-- <Child></Child> -->
+  </div>
+</body>
+
+<script>
+  Object.assign(window, Vue);
+
+  // import Child from './child.vue'
+
+  // const { createApp, reactive, toRefs } = Vue;
+  const data = reactive({
+    state: 12
+  })
+  const myCompositionApi = {
+    setup() {
+      return {
+        ...toRefs(data)
+      }
+    }
+  }
+  const app = createApp(myCompositionApi).mount("#app");
+
+</script>
+
+</html>
