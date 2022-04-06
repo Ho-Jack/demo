@@ -41,7 +41,8 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js"],
   },
 
-    devtool: isProd ? "cheap-module-source-map" : "cheap-module-eval-source-map",
+    // devtool: isProd ? "cheap-module-source-map" : "cheap-module-eval-source-map",
+    devtool: "cheap-module-source-map",
 
   devServer: {
     host: "localhost", // 主机名
