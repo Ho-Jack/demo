@@ -1,3 +1,10 @@
+/*
+ * @Author: HoJack 965389230@qq.com
+ * @Date: 2025-02-14 11:29:57
+ * @LastEditors: HoJack 965389230@qq.com
+ * @LastEditTime: 2025-02-14 11:35:20
+ * @Description:
+ */
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
@@ -24,7 +31,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: "ts-loader",
-        include: [resolve("src")],
+        include: [resolve("./src")],
       },
     ],
   },
@@ -41,8 +48,8 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js"],
   },
 
-    // devtool: isProd ? "cheap-module-source-map" : "cheap-module-eval-source-map",
-    devtool: "cheap-module-source-map",
+  // devtool: isProd ? "cheap-module-source-map" : "cheap-module-eval-source-map",
+  devtool: "cheap-module-source-map",
 
   devServer: {
     host: "localhost", // 主机名

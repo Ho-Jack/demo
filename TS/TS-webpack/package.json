@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
